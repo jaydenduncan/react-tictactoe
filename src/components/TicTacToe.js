@@ -18,7 +18,7 @@ function TicTacToe({board, playerChar, comChar}){
 		for(let i=0; i<3; i++){
 
 			for(let j=0; j<3; j++){
-				if(gameboard[i][j] === ""){
+				if(gameboard[i][j].val === ""){
 					openSquares.push({row: i, column: j});
 				}
 			}
@@ -36,10 +36,16 @@ function TicTacToe({board, playerChar, comChar}){
 	}
 
 	function placeMarkPlayer(row, column) {
-		setGameStarted(true);
+		setGameStarted(true); // start the game
+
+		// Update state of gameboard
 		let boardState = gameboard.slice(); // create copy of gameboard state
-		boardState[row][column] = playerChar;
+		boardState[row][column].val = playerChar; // fill square with player mark
+		boardState[row][column].clicked = true; // square has been clicked
+		document.getElementById("square"+row+column).style.cursor = "default";
 		setGameboard(boardState);
+
+		// Toggle turn
 		toggle();
 	}
 
@@ -48,9 +54,14 @@ function TicTacToe({board, playerChar, comChar}){
 		let squareIdx = Math.floor(Math.random() * (openSquares.length-1));
 		let square = openSquares[squareIdx];
 
+		// Update state of gameboard
 		let boardState = gameboard.slice();
-		boardState[square.row][square.column] = comChar;
+		boardState[square.row][square.column].val = comChar;
+		boardState[square.row][square.column].clicked = true;
+		document.getElementById("square"+square.row+square.column).style.cursor = "default";
 		setGameboard(boardState);
+
+		// Toggle turn
 		toggle();
 	}
 
@@ -66,23 +77,23 @@ function TicTacToe({board, playerChar, comChar}){
 				<table className="gameBoard">
 					<tbody>
 						<tr>
-							<td id="square00" onClick={() => placeMarkPlayer(0, 0)}>{gameboard[0][0]}</td>
-							<td id="square01" className="lr" onClick={() => placeMarkPlayer(0, 1)}>{gameboard[0][1]}</td>
-							<td id="square02" onClick={() => placeMarkPlayer(0, 2)}>{gameboard[0][2]}</td>
+							<td id="square00" onClick={!gameboard[0][0].clicked ? () => placeMarkPlayer(0, 0) : null}>{gameboard[0][0].val}</td>
+							<td id="square01" className="lr" onClick={!gameboard[0][1].clicked ? () => placeMarkPlayer(0, 1) : null}>{gameboard[0][1].val}</td>
+							<td id="square02" onClick={!gameboard[0][2].clicked ? () => placeMarkPlayer(0, 2) : null}>{gameboard[0][2].val}</td>
 						</tr>
 					</tbody>
 					<tbody>
 						<tr>
-							<td id="square10" className="tb" onClick={() => placeMarkPlayer(1, 0)}>{gameboard[1][0]}</td>
-							<td id="square11" className="tb lr" onClick={() => placeMarkPlayer(1, 1)}>{gameboard[1][1]}</td>
-							<td id="square12" className="tb" onClick={() => placeMarkPlayer(1, 2)}>{gameboard[1][2]}</td>
+							<td id="square10" className="tb" onClick={!gameboard[1][0].clicked ? () => placeMarkPlayer(1, 0) : null}>{gameboard[1][0].val}</td>
+							<td id="square11" className="tb lr" onClick={!gameboard[1][1].clicked ? () => placeMarkPlayer(1, 1) : null}>{gameboard[1][1].val}</td>
+							<td id="square12" className="tb" onClick={!gameboard[1][2].clicked ? () => placeMarkPlayer(1, 2) : null}>{gameboard[1][2].val}</td>
 						</tr>
 					</tbody>
 					<tbody>
 						<tr>
-							<td id="square20" onClick={() => placeMarkPlayer(2, 0)}>{gameboard[2][0]}</td>
-							<td id="square21" className="lr" onClick={() => placeMarkPlayer(2, 1)}>{gameboard[2][1]}</td>
-							<td id="square22" onClick={() => placeMarkPlayer(2, 2)}>{gameboard[2][2]}</td>
+							<td id="square20" onClick={!gameboard[2][0].clicked ? () => placeMarkPlayer(2, 0) : null}>{gameboard[2][0].val}</td>
+							<td id="square21" className="lr" onClick={!gameboard[2][1].clicked ? () => placeMarkPlayer(2, 1) : null}>{gameboard[2][1].val}</td>
+							<td id="square22" onClick={!gameboard[2][2].clicked ? () => placeMarkPlayer(2, 2) : null}>{gameboard[2][2].val}</td>
 						</tr>
 					</tbody>
 				</table>
