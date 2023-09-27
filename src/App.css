@@ -7,6 +7,10 @@ h1{
 	text-align: center;
 }
 
+#winnerMessage {
+	text-align: center;
+}
+
 .gameboardDiv{
 	display: flex;
 	justify-content: center;
