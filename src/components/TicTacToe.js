@@ -2,10 +2,17 @@ import React, {useState, useEffect} from "react";
 import '../App.css';
 
 function TicTacToe({board, playerChar, comChar}){
-	const [gameboard, setGameboard] = useState(board);
+	const initialBoard = [
+		[{val: "", clicked: false}, {val: "", clicked: false}, {val: "", clicked: false}], 
+		[{val: "", clicked: false}, {val: "", clicked: false}, {val: "", clicked: false}], 
+		[{val: "", clicked: false}, {val: "", clicked: false}, {val: "", clicked: false}]
+	]; // represents initial state of the board
+
+	const [gameboard, setGameboard] = useState(board); // Dynamically changes during the game
 	const [playerTurn, setPlayerTurn] = useState(true);
 	const [gameStarted, setGameStarted] = useState(false);
 	const [gameEnded, setGameEnded] = useState(false);
+	const [restartClicked, setRestartClicked] = useState(false);
 
 	const User = {
 		PLAYER: "Player",
@@ -76,7 +83,24 @@ function TicTacToe({board, playerChar, comChar}){
 	}
 
 	function endGame() {
-		console.log("Game was ended.");
+		document.getElementById("restartBtn").style.display = "inline-block";
+	}
+
+	function handleRestart() {
+		setRestartClicked(true);
+	}
+
+	function restartGame() {
+		if(restartClicked){
+			setGameboard(initialBoard);
+			setPlayerTurn(true);
+			setGameStarted(false);
+			setGameEnded(false);
+			document.getElementById("winnerMessage").innerHTML = "";
+			document.getElementById("restartBtn").style.display = "none";
+
+			setRestartClicked(false);
+		}
 	}
 
 	function placeMarkPlayer(row, column) {
@@ -86,7 +110,6 @@ function TicTacToe({board, playerChar, comChar}){
 		let boardState = gameboard.slice(); // create copy of gameboard state
 		boardState[row][column].val = playerChar; // fill square with player mark
 		boardState[row][column].clicked = true; // square has been clicked
-		document.getElementById("square"+row+column).style.cursor = "default";
 		setGameboard(boardState);
 
 		// Toggle turn
@@ -102,7 +125,6 @@ function TicTacToe({board, playerChar, comChar}){
 		let boardState = gameboard.slice();
 		boardState[square.row][square.column].val = comChar;
 		boardState[square.row][square.column].clicked = true;
-		document.getElementById("square"+square.row+square.column).style.cursor = "default";
 		setGameboard(boardState);
 
 		// Toggle turn
@@ -114,10 +136,16 @@ function TicTacToe({board, playerChar, comChar}){
 		updateOpenSquares();
 	}, [gameboard]);
 
+	// End the game when the gameEnded state changes
 	useEffect(() => {
 		if(gameStarted)
 			endGame();
 	}, [gameEnded]);
+
+	// Restart the game when the restart button is clicked
+	useEffect(() => {
+		restartGame();
+	}, [restartClicked]);
 
     return (
         <div className="container">
@@ -148,6 +176,8 @@ function TicTacToe({board, playerChar, comChar}){
 					</tbody>
 				</table>
 			</div>
+
+			<button id="restartBtn" className="restartBtn" onClick={handleRestart}>PLAY AGAIN</button>
         </div>
     );
 }

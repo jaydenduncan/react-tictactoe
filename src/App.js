@@ -2,7 +2,7 @@ import './App.css';
 import TicTacToe from './components/TicTacToe';
 
 function App() {
-  var initialBoard = [
+  var board = [
     [{val: "", clicked: false}, {val: "", clicked: false}, {val: "", clicked: false}], 
     [{val: "", clicked: false}, {val: "", clicked: false}, {val: "", clicked: false}], 
     [{val: "", clicked: false}, {val: "", clicked: false}, {val: "", clicked: false}]
@@ -12,7 +12,7 @@ function App() {
 
   return (
     <div className="App">
-      <TicTacToe board={initialBoard} playerChar={player} comChar={computer} />
+      <TicTacToe board={board} playerChar={player} comChar={computer} />
     </div>
   );
 }
