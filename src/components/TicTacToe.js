@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import '../App.css';
 
-function TicTacToe({board, playerChar, comChar}){
+function TicTacToe({board, playerChar, comChar, playerGoesFirst}){
 	const initialBoard = [
 		[{val: "", clicked: false}, {val: "", clicked: false}, {val: "", clicked: false}], 
 		[{val: "", clicked: false}, {val: "", clicked: false}, {val: "", clicked: false}], 
@@ -9,7 +9,7 @@ function TicTacToe({board, playerChar, comChar}){
 	]; // represents initial state of the board
 
 	const [gameboard, setGameboard] = useState(board); // Dynamically changes during the game
-	const [playerTurn, setPlayerTurn] = useState(true);
+	const [playerTurn, setPlayerTurn] = useState(playerGoesFirst);
 	const [gameStarted, setGameStarted] = useState(false);
 	const [gameEnded, setGameEnded] = useState(false);
 	const [restartClicked, setRestartClicked] = useState(false);
@@ -92,8 +92,11 @@ function TicTacToe({board, playerChar, comChar}){
 
 	function restartGame() {
 		if(restartClicked){
+			let randNum = Math.floor(Math.random() * 2) // random number between 0 and 1
+			let playerGoesFirst = randNum === 1 ? true : false;
+
 			setGameboard(initialBoard);
-			setPlayerTurn(true);
+			setPlayerTurn(playerGoesFirst);
 			setGameStarted(false);
 			setGameEnded(false);
 			document.getElementById("winnerMessage").innerHTML = "";
@@ -104,19 +107,25 @@ function TicTacToe({board, playerChar, comChar}){
 	}
 
 	function placeMarkPlayer(row, column) {
-		setGameStarted(true); // start the game
+		if(!gameStarted)
+			setGameStarted(true);
 
-		// Update state of gameboard
-		let boardState = gameboard.slice(); // create copy of gameboard state
-		boardState[row][column].val = playerChar; // fill square with player mark
-		boardState[row][column].clicked = true; // square has been clicked
-		setGameboard(boardState);
+		if(playerTurn){
+			// Update state of gameboard
+			let boardState = gameboard.slice(); // create copy of gameboard state
+			boardState[row][column].val = playerChar; // fill square with player mark
+			boardState[row][column].clicked = true; // square has been clicked
+			setGameboard(boardState);
 
-		// Toggle turn
-		toggle();
+			// Toggle turn
+			toggle();
+		}
 	}
 
 	function placeMarkCom(openSquares) {
+		if(!gameStarted)
+			setGameStarted(true);
+
 		// Find random open square for computer
 		let squareIdx = Math.floor(Math.random() * (openSquares.length-1));
 		let square = openSquares[squareIdx];
@@ -144,13 +153,13 @@ function TicTacToe({board, playerChar, comChar}){
 
 	// Restart the game when the restart button is clicked
 	useEffect(() => {
-		restartGame();
+		if(gameEnded)
+			restartGame();
 	}, [restartClicked]);
 
     return (
         <div className="container">
-            <h1>Tic Tac Toe</h1>
-			<p id="winnerMessage"></p>
+			<p id="winnerMessage" className="winnerMessage"></p>
             <div className="gameboardDiv">
 				<table className="gameBoard">
 					<tbody>
