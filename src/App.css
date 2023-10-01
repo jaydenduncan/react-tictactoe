@@ -1,33 +1,101 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Mooli&family=Roboto+Condensed:wght@300&family=Slabo+27px&display=swap");
+
 body {
 	background-color: black;
 }
 
-#container{
+.container{
 	display: flex;
 	justify-content: center;
+	width: 99%;
+	height: 99%;
+}
+
+.winnerMessageDiv{
+	border: 2px solid white;
+	height: 125px;
+	width: 50%;
+	float: left;
+	background-color: #f0cd07;
 }
 
 .winnerMessage {
 	text-align: center;
-	color: red;
-	font-size: 40px;
+	color: black;
+	font-size: 35px;
+	font-family: 'Slabo 27px', serif;
 }
 
-.gameboardDiv{
-	display: flex;
-	justify-content: center;
+.scoreboard{
+	font-size: 22px;
+	border: 2px solid white;
+	height: 125px;
+	width: 50%;
+	float: right;
+	background-color: #f0cd07;
+}
+
+.playerScoreDiv{
+	border: 2px solid red;
+	border-radius: 5px;
+	background-color: white;
+	padding: 10px;
+}
+
+.playerScoreDiv p{
+	display: inline;
+	text-align: right;
+}
+
+.playerHeading{
+	width: 15%;
+	height: 100%;
+	font-size: 12px;
+}
+
+.playerScore{
+	width: 50%;
+	margin-top: auto;
+	float: right;
+}
+
+.computerScoreDiv{
+	border: 2px solid red;
+	border-radius: 5px;
+	background-color: white;
+	padding: 10px;
+	margin-top: 15px;
+}
+
+.computerScoreDiv p{
+	display: inline;
+	text-align: right;
+}
+
+.computerHeading{
+	width: 15%;
+	height: 100%;
+	font-size: 12px;
+}
+
+.computerScore{
+	width: 50%;
+	margin-top: auto;
+	float: right;
 }
 
 .gameBoard{
 	margin: 5px auto;
 	position: absolute;
-	top: 50%;
+	top: 25%;
 	transform: translateY(-50%);
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 td{
-	height: 150px;
-	width: 125px;
+	height: 150px; /* 150 x 125 */
+	width: 150px;
 	font-size: 115px;
 	font-weight: lighter;
 	text-align: center;
@@ -50,13 +118,13 @@ td{
 	width: 300px;
 	border-radius: 15px;
 	border: 3px solid red;
-	margin-top: 700px;
+	margin-top: 750px;
 	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
 	cursor: pointer;
 	display: none;
-	color: red;
-	background-color: black;
+	color: black;
+	background-color: #f0cd07;
 	font-size: 20px;
 }
