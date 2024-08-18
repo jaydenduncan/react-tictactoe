@@ -44,7 +44,6 @@ function TicTacToe({board, playerChar, comChar, playerGoesFirst}){
 		// Determine if there is a winner
 		let winner = determineWinner();
 		if(winner){
-			document.getElementById("winnerMessage").innerHTML = winner + " wins!";
 
 			if(winner === User.PLAYER)
 				setPlayerScore(playerScore + 1);
@@ -56,7 +55,6 @@ function TicTacToe({board, playerChar, comChar, playerGoesFirst}){
 
 		// End game if all spots are occupied
 		else if(openSquares.length <= 0){
-			document.getElementById("winnerMessage").innerHTML = "It was a draw.";
 			setGameEnded(true);
 		}
 		
@@ -109,7 +107,6 @@ function TicTacToe({board, playerChar, comChar, playerGoesFirst}){
 			setPlayerTurn(playerGoesFirst);
 			setGameStarted(false);
 			setGameEnded(false);
-			document.getElementById("winnerMessage").innerHTML = "";
 			document.getElementById("restartBtn").style.display = "none";
 
 			setRestartClicked(false);

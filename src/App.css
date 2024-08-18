@@ -11,19 +11,18 @@ body {
 	height: 99%;
 }
 
-.winnerMessageDiv{
-	border: 2px solid white;
-	height: 125px;
-	width: 50%;
-	float: left;
-	background-color: #f0cd07;
-}
-
-.winnerMessage {
+.scores{
+	display: flex;
+	color: red;
+	font-size: 75px;
 	text-align: center;
-	color: black;
-	font-size: 35px;
-	font-family: 'Slabo 27px', serif;
+	text-shadow: 0 0 10px #fff, 
+	0 0 20px #fff, 
+	0 0 30px #f51d28, 
+	0 0 40px #f51d28, 
+	0 0 50px #f51d28, 
+	0 0 60px #f51d28, 
+	0 0 70px #f51d28;
 }
 
 .scoreboard{
