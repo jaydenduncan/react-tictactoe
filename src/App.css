@@ -35,8 +35,10 @@ body {
 }
 
 td{
-	height: 150px;
-	width: 150px;
+	height: 9.38rem;
+	width: 9.38rem;
+	min-height: 100px;
+	min-width: 100px;
 	font-size: 115px;
 	font-weight: lighter;
 	text-align: center;
@@ -59,13 +61,68 @@ td{
 	width: 200px;
 	border-radius: 10px;
 	border: 3px solid #f51d28;
-	margin-top: 750px;
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
 	cursor: pointer;
 	display: none;
 	color: black;
 	background-color: #f51d28;
 	font-size: 20px;
+	position: absolute;
+	top: 85%;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+@media screen and (max-height: 850px) {
+	.scores{
+		font-size: 50px;
+	}
+
+	td{
+		height: 6.25rem;
+		width: 6.25rem;
+		min-height: 115px;
+		font-size: 90px;
+	}
+
+	.restartBtn{
+		height: 44px;
+		width: 175px;
+		font-size: 18px;
+	}
+}
+
+@media screen and (max-height: 650px) {
+	.scores{
+		font-size: 40px;
+	}
+
+	td{
+		height: 5rem;
+		width: 5rem;
+		font-size: 75px;
+	}
+
+	.restartBtn{
+		height: 38px;
+		width: 150px;
+		font-size: 16px;
+	}
+}
+
+@media screen and (min-height: 1100px) {
+	.scores{
+		font-size: 100px;
+	}
+
+	td{
+		height: 12rem;
+		width: 12rem;
+		font-size: 130px;
+	}
+
+	.restartBtn{
+		height: 63px;
+		width: 250px;
+		font-size: 24px;
+	}
 }
